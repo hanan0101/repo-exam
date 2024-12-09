@@ -8,7 +8,7 @@ module register#(
     output logic [n-1:0]Q
 );
 
-    always_ff @(posedge clk)
+    always_ff @(clk)
     begin 
         if(~resetn) Q <= 0;
         else if(wen) Q <= D;
