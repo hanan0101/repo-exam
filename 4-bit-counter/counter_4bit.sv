@@ -17,7 +17,7 @@ module counter_4bit#(
         logic [3:0] next_count;
         assign next_count[0] = ~count[0];
         assign next_count[1] = count[0] ^ count[1];
-        assign next_count[2] = (count[0] & count[1]) ^ count[2];
+        assign next_count[2] = (~count[0] & count[1]) ^ count[2];
         assign next_count[3] = (count[0] & count[1] & ~count[2])  ^ count[3];
 
         // do count plus one or load a value to counter
@@ -44,7 +44,6 @@ module counter_4bit#(
 
         d_flipflop dff2(
             .clk(clk),
-            .D(dff2_data_i),
             .reset_n(reset_n),
             .Q(count[2])
             );

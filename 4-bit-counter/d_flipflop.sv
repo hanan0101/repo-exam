@@ -11,14 +11,14 @@ logic d_latch0_clk;
 logic d_latch1_clk;
 
 assign d_latch0_clk = ~clk;
-assign d_latch1_clk = ~d_latch0_clk;
+assign d_latch1_clk = ~clk;
 
 d_latch_asyn_rstn d_latch0(
     .clk(d_latch0_clk),
     .D(D),
     .reset_n(reset_n),
     .Q(d_latch0_o),
-    .Qn() 
+    .Qn(Qn) 
 );
 
 d_latch_asyn_rstn d_latch1(
@@ -26,7 +26,7 @@ d_latch_asyn_rstn d_latch1(
     .D(d_latch0_o),
     .reset_n(reset_n),
     .Q(Q),
-    .Qn(Qn) 
+    .Qn() 
 );
 
 endmodule : d_flipflop
