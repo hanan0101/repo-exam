@@ -7,19 +7,10 @@ module addsub #(
     output logic [n-1:0] S,
     output logic Cout
 );
-    logic [n : 0] C;
-    logic [n-1:0] Xor_o;
-    // 
 
-    xor (Xor_o[0], B[0], M);
-    xor (Xor_o[1], B[1], M);
-    xor (Xor_o[2], B[2], M);
-    xor (Xor_o[3], B[3], M);
+    logic [n-1] Bin;
 
-    full_adder fa_inst0(C[0],  A[i], Xor_o[i], S[i], C[1]);
-    full_adder fa_inst0(C[1],  A[i], Xor_o[i], S[i], C[2]);
-    full_adder fa_inst0(C[2],  A[i], Xor_o[i], S[i], C[3]);
-    full_adder fa_inst0(C[3],  A[i], Xor_o[i], S[i], C[4]);
-    assign Cout = C[n];
+    assign Bin = M ? ~B : B;
 
+    assign {Cout, S} = A + Bin + M;
 endmodule : addsub
